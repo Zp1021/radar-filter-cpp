@@ -1,0 +1,11 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: g++ -std=c++17 -Wall -Wextra -Werror alpha_beta.cpp test_alpha_beta.cpp -o test_alpha_beta
+      - run: ./test_alpha_beta
+      - run: g++ -std=c++17 -Wall -Wextra -Werror alpha_beta.cpp main.cpp -o tracker
+      - runn: ./tracker measurements.csv
